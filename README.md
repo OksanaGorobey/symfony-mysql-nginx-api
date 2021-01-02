@@ -55,3 +55,17 @@ docker exec -it mysql8-container bash
 Регистрация 
 
 curl --location --request POST "http://localhost:8080/registration"  --header "Content-Type: application/x-www-form-urlencoded"  --data "nickname=login&password=loginloginlogin&firstname=test&lastname=test&age=32&email=login@gmail.com"
+
+{"code":200,"content":"Зареєстровано успішно. Тепер можете увійти!"}
+
+Авторизація
+
+curl --location --request POST "http://localhost:8080/login"  --header "Content-Type: application/x-www-form-urlencoded"  --data "nickname=login&password=loginloginlogin"
+
+{"code":200,"content":{"token":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibG9naW4iLCJleHAiOjE2MDk2MDI0Nzl9.ApgJRz7F_YAnElxoNMVLE6azhOa1NaOBPk9ugDGMF6M"}}
+
+Список користувачів за параметром email/nickname
+
+curl -L -X GET 'http://localhost:8080/api/users/list?params=email' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRkX3Rlc3RfcG9zdG1hbl84MTgiLCJleHAiOjE2MDk2MDQzNDF9.cfqCVCeE4Cc31sPQe25ezVSnlzZoSS-Df8NvA5Zmw7A'
+
+{"code":200,"content":{"type":"email","list":["login@gmail.com","ddd13@gmail.com","ddd1@gmail.com"]}}

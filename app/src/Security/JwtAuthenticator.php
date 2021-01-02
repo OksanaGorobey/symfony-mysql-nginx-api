@@ -62,17 +62,27 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
      */
     public function getCredentials(\Symfony\Component\HttpFoundation\Request $request )
     {
-        $extractor = new \Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor(
-            'Bearer',
-            'Authorization'
-        );
+        if( !$request->headers->has( 'Authorization' ) )
+        {
+            return false;
+        }
 
-        $token = $extractor->extract( $request );
+        $authorizationHeader = $request->headers->get( 'Authorization' );
+
+        $headerParts = explode( ' ', $authorizationHeader );
+
+        if( !( 2 === count( $headerParts ) && 0 === strcasecmp( $headerParts[0], 'Bearer' ) ) )
+        {
+            return false;
+        }
+
+        $token = $headerParts[ 1 ];
 
         if( !$token )
         {
             return;
         }
+
         return $token;
     }
 
