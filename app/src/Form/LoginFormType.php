@@ -23,7 +23,7 @@ class LoginFormType extends \Symfony\Component\Form\AbstractType
                     [
                         new \Symfony\Component\Validator\Constraints\NotBlank(
                             [
-                                'password' => 'nickname not blank',
+                                'message' => 'nickname not blank',
                             ]
                         ),
                         new \Symfony\Component\Validator\Constraints\Regex(
@@ -50,7 +50,7 @@ class LoginFormType extends \Symfony\Component\Form\AbstractType
                     [
                         new \Symfony\Component\Validator\Constraints\NotBlank(
                             [
-                                'password' => 'Params not blank',
+                                'message' => 'password not blank',
                             ]
                         ),
                         new \Symfony\Component\Validator\Constraints\Length(
