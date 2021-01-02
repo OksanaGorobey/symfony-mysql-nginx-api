@@ -1,5 +1,6 @@
 # symfony-mysql-nginx-api
 
+# ТЗ:
 Написать RESTfull API, для сервиса который позволяет авторизироваться пользователю и получать данные о пользователях.
 Необходимые запросы:
 1) Регистрация пользователя (обязательные поля: (firstname, lastname, nickname, email, age, password)
@@ -69,3 +70,9 @@ curl --location --request POST "http://localhost:8080/login"  --header "Content-
 curl -L -X GET 'http://localhost:8080/api/users/list?params=email' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRkX3Rlc3RfcG9zdG1hbl84MTgiLCJleHAiOjE2MDk2MDQzNDF9.cfqCVCeE4Cc31sPQe25ezVSnlzZoSS-Df8NvA5Zmw7A'
 
 {"code":200,"content":{"type":"email","list":["login@gmail.com","ddd13@gmail.com","ddd1@gmail.com"]}}
+
+Перегляд інформації про користувача  за id
+
+curl -L -X GET 'http://localhost:8080/api/users/2' -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRkX3Rlc3RfcG9zdG1hbl84MTgiLCJleHAiOjE2MDk2MDQ3NTZ9.ASV75BSmN8Y5iU6G7HAgdFYktW8-GV5rR-m_x7f5JLc'
+
+{"code":200,"content":{"id":2,"firstname":"test","lastname":"test","email":"ddd13@gmail.com","nickname":"add_test_3postman_818","age":32,"created_date":"02.01.2021 17:52"}}

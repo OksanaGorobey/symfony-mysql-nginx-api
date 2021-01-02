@@ -21,24 +21,18 @@ namespace App\Controller
          *
          * @Route( "/", name="index_api", methods={"GET"} )
          */
-        public function indexAction( \Symfony\Contracts\Translation\TranslatorInterface $translator ) : \Symfony\Component\HttpFoundation\JsonResponse
+        public function indexAction() : \Symfony\Component\HttpFoundation\JsonResponse
         {
-            $translator = new \Symfony\Component\Translation\Translator('uk_UK');
-            $translator->addLoader('array', new \Symfony\Component\Translation\Loader\ArrayLoader());
-//            $translator->addResource('array', 'messages.uk.php', 'uk_UK');
-//            var_dump($translator->trans( 'Symfony is great') );
-
-
-                        $translator->addResource('array', [
-                'Symfony is great' => "J'aime Symfony"
-            ], 'uk_UK');
-
+            $translator = new \Symfony\Component\Translation\Translator('uk');
+            $translator->addLoader('php', new \Symfony\Component\Translation\Loader\PhpFileLoader());
+            $translator->addResource('php',  __DIR__.'/../translations/messages.uk.php', 'uk');
+            
             return $this->response(
                 [
                     'code'          => \App\lib\consts::APPLICATION_CODE_OK,
                     'content'       =>
                     [
-                        'message'   => $translator->trans('Symfony is great'),
+                        'message'   => $translator->trans('Symfony is great' ),
 //                        'message'   => $translator->trans('Symfony is great',
 //                            [],
 //                            'messages',
