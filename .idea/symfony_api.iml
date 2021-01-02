@@ -72,6 +72,12 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/property-access" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/validator" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-http" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-csrf" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-core" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/security-guard" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

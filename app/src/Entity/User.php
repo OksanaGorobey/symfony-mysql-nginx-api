@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -8,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  */
-class User implements \JsonSerializable
+class User implements \Symfony\Component\Security\Core\User\UserInterface
 {
     /**
      * @var string
@@ -223,35 +224,35 @@ class User implements \JsonSerializable
             ];
     }
 
-//    /**
-//     * @return array
-//     */
-//    public function getRoles(): array
-//    {
-//        return [ 'ROLE_USER' ] ;
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function getSalt(): void
-//    {
-//        // not needed when using the "bcrypt" algorithm in security.yaml
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function eraseCredentials(): void
-//    {
-//
-//    }
-//
-//    /**
-//     * @return string
-//     */
-//    public function getUsername(): string
-//    {
-//        return $this->getNickname();
-//    }
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return [ 'ROLE_USER' ] ;
+    }
+
+    /**
+     *
+     */
+    public function getSalt(): void
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     *
+     */
+    public function eraseCredentials(): void
+    {
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->getNickname();
+    }
 }

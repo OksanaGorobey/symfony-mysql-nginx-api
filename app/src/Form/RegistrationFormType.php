@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\User;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class RegistrationFormType
+ * @package App\Form
+ */
 class RegistrationFormType extends \Symfony\Component\Form\AbstractType
 {
     /**
@@ -22,25 +22,25 @@ class RegistrationFormType extends \Symfony\Component\Form\AbstractType
                 \Symfony\Component\Form\Extension\Core\Type\TextType::class,
                 [
                     'constraints' =>
-                        [
-                            new \Symfony\Component\Validator\Constraints\NotBlank(
-                                [
-                                    'message' => 'firstname not blank',
-                                ]
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Regex(
-                                \App\lib\consts::PATTERN_NAME,
-                                'firstname regexp'
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Length(
-                                [
-                                    'min' => \App\lib\consts::NAME_MINLENGTH,
-                                    'max' => \App\lib\consts::NAME_MAXLENGTH,
-                                    'minMessage' => 'Your first name must be at least {{ limit }} characters long',
-                                    'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-                                ]
-                            ),
-                        ]
+                    [
+                        new \Symfony\Component\Validator\Constraints\NotBlank(
+                            [
+                                'message' => 'firstname not blank',
+                            ]
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Regex(
+                            \App\lib\consts::PATTERN_NAME,
+                            'firstname regexp'
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Length(
+                            [
+                                'min' => \App\lib\consts::NAME_MINLENGTH,
+                                'max' => \App\lib\consts::NAME_MAXLENGTH,
+                                'minMessage' => 'Your first name must be at least {{ limit }} characters long',
+                                'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
+                            ]
+                        ),
+                    ]
                 ]
             )
 
@@ -50,25 +50,25 @@ class RegistrationFormType extends \Symfony\Component\Form\AbstractType
                 \Symfony\Component\Form\Extension\Core\Type\TextType::class,
                 [
                     'constraints' =>
-                        [
-                            new \Symfony\Component\Validator\Constraints\NotBlank(
-                                [
-                                    'message' => 'lastname not blank',
-                                ]
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Regex(
-                                \App\lib\consts::PATTERN_NAME,
-                                'lastname regexp'
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Length(
-                                [
-                                    'min' => \App\lib\consts::NAME_MINLENGTH,
-                                    'max' => \App\lib\consts::NAME_MAXLENGTH,
-                                    'minMessage' => 'Your first name must be at least {{ limit }} characters long',
-                                    'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-                                ]
-                            ),
-                        ]
+                    [
+                        new \Symfony\Component\Validator\Constraints\NotBlank(
+                            [
+                                'message' => 'lastname not blank',
+                            ]
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Regex(
+                            \App\lib\consts::PATTERN_NAME,
+                            'lastname regexp'
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Length(
+                            [
+                                'min' => \App\lib\consts::NAME_MINLENGTH,
+                                'max' => \App\lib\consts::NAME_MAXLENGTH,
+                                'minMessage' => 'Your first name must be at least {{ limit }} characters long',
+                                'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
+                            ]
+                        ),
+                    ]
                 ]
             )
 
@@ -77,25 +77,25 @@ class RegistrationFormType extends \Symfony\Component\Form\AbstractType
                 \Symfony\Component\Form\Extension\Core\Type\TextType::class,
                 [
                     'constraints' =>
-                        [
-                            new \Symfony\Component\Validator\Constraints\NotBlank(
-                                [
-                                    'message' => 'nickname not blank',
-                                ]
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Regex(
-                                \App\lib\consts::PATTERN_NICKNAME,
-                                'nickname regexp'
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Length(
-                                [
-                                    'min' => \App\lib\consts::NAME_MINLENGTH,
-                                    'max' => \App\lib\consts::NAME_MAXLENGTH,
-                                    'minMessage' => 'Your first name must be at least {{ limit }} characters long',
-                                    'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-                                ]
-                            ),
-                        ]
+                    [
+                        new \Symfony\Component\Validator\Constraints\NotBlank(
+                            [
+                                'message' => 'nickname not blank',
+                            ]
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Regex(
+                            \App\lib\consts::PATTERN_NICKNAME,
+                            'nickname regexp'
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Length(
+                            [
+                                'min' => \App\lib\consts::NAME_MINLENGTH,
+                                'max' => \App\lib\consts::NAME_MAXLENGTH,
+                                'minMessage' => 'Your first name must be at least {{ limit }} characters long',
+                                'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
+                            ]
+                        ),
+                    ]
                 ]
             )
 
@@ -104,18 +104,18 @@ class RegistrationFormType extends \Symfony\Component\Form\AbstractType
                 \Symfony\Component\Form\Extension\Core\Type\TextType::class,
                 [
                     'constraints' =>
-                        [
-                            new \Symfony\Component\Validator\Constraints\NotBlank(
-                                [
-                                    'message' => 'email not blank',
-                                ]
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Email(
-                                [
-                                    'message' => 'The email "{{ value }}" is not a valid email.',
-                                ]
-                            ),
-                        ]
+                    [
+                        new \Symfony\Component\Validator\Constraints\NotBlank(
+                            [
+                                'message' => 'email not blank',
+                            ]
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Email(
+                            [
+                                'message' => 'The email "{{ value }}" is not a valid email.',
+                            ]
+                        ),
+                    ]
                 ]
             )
 
@@ -124,20 +124,20 @@ class RegistrationFormType extends \Symfony\Component\Form\AbstractType
                 \Symfony\Component\Form\Extension\Core\Type\IntegerType::class,
                 [
                     'constraints' =>
-                        [
-                            new \Symfony\Component\Validator\Constraints\NotBlank(
-                                [
-                                    'message' => 'age not blank',
-                                ]
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Range(
-                                [
-                                    'min' => \App\lib\consts::AGE_MIN,
-                                    'max' => \App\lib\consts::AGE_MAX,
-                                    'notInRangeMessage' => 'You must be between {{ min }}cm and {{ max }}cm tall to enter',
-                                ]
-                            ),
-                        ]
+                    [
+                        new \Symfony\Component\Validator\Constraints\NotBlank(
+                            [
+                                'message' => 'age not blank',
+                            ]
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Range(
+                            [
+                                'min' => \App\lib\consts::AGE_MIN,
+                                'max' => \App\lib\consts::AGE_MAX,
+                                'notInRangeMessage' => 'You must be between {{ min }}cm and {{ max }}cm tall to enter',
+                            ]
+                        ),
+                    ]
                 ]
             )
 
@@ -146,31 +146,38 @@ class RegistrationFormType extends \Symfony\Component\Form\AbstractType
                 \Symfony\Component\Form\Extension\Core\Type\TextType::class,
                 [
                     'constraints' =>
-                        [
-                            new \Symfony\Component\Validator\Constraints\NotBlank(
-                                [
-                                    'message' => 'password not blank',
-                                ]
-                            ),
-                            new \Symfony\Component\Validator\Constraints\Length(
-                                [
-                                    'min' => \App\lib\consts::PASSWORD_MINLENGTH,
-                                    'max' => \App\lib\consts::PASSWORD_MAXLENGTH,
-                                    'minMessage' => 'Your first name must be at least {{ limit }} characters long',
-                                    'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-                                ]
-                            ),
-                        ]
+                    [
+                        new \Symfony\Component\Validator\Constraints\NotBlank(
+                            [
+                                'message' => 'password not blank',
+                            ]
+                        ),
+                        new \Symfony\Component\Validator\Constraints\Length(
+                            [
+                                'min' => \App\lib\consts::PASSWORD_MINLENGTH,
+                                'max' => \App\lib\consts::PASSWORD_MAXLENGTH,
+                                'minMessage' => 'Your first name must be at least {{ limit }} characters long',
+                                'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
+                            ]
+                        ),
+                    ]
                 ]
             )
         ;
     }
 
-    public function configureOptions( \Symfony\Component\OptionsResolver\OptionsResolver $resolver )
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [
-                'data_class' => \App\Entity\User::class,
+            'data_class'      => 'App\Entity\User',
+            'csrf_protection' => false,
+            'csrf_field_name' => '_token',
+            // a unique key to help generate the secret token
+            'intention'       => 'user_item',
             ]
         );
     }
