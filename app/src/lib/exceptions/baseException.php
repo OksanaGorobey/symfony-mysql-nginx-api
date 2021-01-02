@@ -28,7 +28,7 @@ namespace App\lib\exceptions
             }
             else
             {
-                $this->message  =  'errors_'.$code;
+                $this->message  = ( new \App\lib\core() )->l10n( 'errors_' . $code );
             }
 
             if( !is_null( $additional_data ) )

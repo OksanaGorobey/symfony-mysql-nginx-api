@@ -23,20 +23,12 @@ namespace App\Controller
          */
         public function indexAction() : \Symfony\Component\HttpFoundation\JsonResponse
         {
-            $translator = new \Symfony\Component\Translation\Translator('uk');
-            $translator->addLoader('php', new \Symfony\Component\Translation\Loader\PhpFileLoader());
-            $translator->addResource('php',  __DIR__.'/../translations/messages.uk.php', 'uk');
-            
             return $this->response(
                 [
                     'code'          => \App\lib\consts::APPLICATION_CODE_OK,
                     'content'       =>
                     [
-                        'message'   => $translator->trans('Symfony is great' ),
-//                        'message'   => $translator->trans('Symfony is great',
-//                            [],
-//                            'messages',
-//                            'uk_UK' ),
+                        'message'   =>  ( new \App\lib\core() )->l10n('general_page' ),
                     ],
                 ],
                 \App\lib\consts::HTTP_CODE_OK
@@ -82,7 +74,7 @@ namespace App\Controller
                     'code'          => \App\lib\consts::APPLICATION_CODE_FORBIDDEN,
                     'content'       =>
                     [
-                        'message'   => 'Forbidden',
+                        'message'   => ( new \App\lib\core() )->l10n('error_403' ),
                     ],
                 ],
                 \App\lib\consts::HTTP_CODE_FORBIDDEN
@@ -105,7 +97,7 @@ namespace App\Controller
                     'code'          => \App\lib\consts::APPLICATION_CODE_NOT_FOUND,
                     'content'       =>
                     [
-                        'message'   => 'Not Found',
+                        'message'   => ( new \App\lib\core() )->l10n('error_404' ),
                     ],
                 ],
                 \App\lib\consts::HTTP_CODE_NOT_FOUND
