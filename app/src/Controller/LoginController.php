@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace App\Controller
 {
     use Symfony\Component\Routing\Annotation\Route;
@@ -25,9 +26,7 @@ namespace App\Controller
         {
             try
             {
-                $user = new \App\Entity\User();
-
-                $form = $this->createForm(\App\Form\LoginFormType::class, $user);
+                $form = $this->createForm( \App\Form\LoginFormType::class );
 
                 $form->submit( $request->request->all(), false);
 
@@ -55,17 +54,17 @@ namespace App\Controller
                     throw new \App\lib\exceptions\actionException( \App\lib\consts::ERROR_CODE_USER_LOGIN_USER_NOT_FOUND );
                 }
 
-                return $this->response(
+                return \App\lib\responses\jsonResponse::response(
                     [
                         'code'          => \App\lib\consts::APPLICATION_CODE_OK,
                         'content'       =>
                         [
                             // генеруэмо токен і надсилаємо
                             'token' => sprintf(
-                                'Bearer %s',
+                                \App\lib\consts::BAERER_FORMAT,
                                 \Firebase\JWT\JWT::encode(
                                     [
-                                        'user' => $user->getUsername(),
+                                        'user' => $user_find->getUsername(),
                                         'exp'  => ( new \DateTime() )->modify( '+5 minutes' )->getTimestamp(),
                                     ],
                                     $this->getParameter('jwt_secret'),
@@ -78,7 +77,7 @@ namespace App\Controller
             }
             catch( \App\lib\exceptions\baseException $e )
             {
-                return $this->response( $e->getData() );
+                return \App\lib\responses\jsonResponse::response( $e->getData() );
             }
         }
 

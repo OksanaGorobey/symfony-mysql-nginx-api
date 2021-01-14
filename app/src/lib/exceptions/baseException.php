@@ -13,11 +13,20 @@ namespace App\lib\exceptions
     {
         ///////////////////////////////////////////////////////////////////////
 
+        /**
+         * @var array|array[]|string[]
+         */
         protected $additional_data  = [];
 
         ///////////////////////////////////////////////////////////////////////
 
-        public function __construct( int $code = 500, string $message = '', $additional_data = null )
+        /**
+         * baseException constructor.
+         * @param int $code
+         * @param string $message
+         * @param null $additional_data
+         */
+        public function __construct(int $code = 500, string $message = '', $additional_data = null )
         {
             $this->code     = $code;
 

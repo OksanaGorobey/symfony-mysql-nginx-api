@@ -11,8 +11,6 @@ namespace App\Controller
 
     class RegistrationController extends BaseController
     {
-        /////////////////////////////////////////////////////////////////////
-
         /**
          * Метод реєстрації користувача
          *
@@ -26,9 +24,7 @@ namespace App\Controller
         {
             try
             {
-                $user = new \App\Entity\User();
-
-                $form = $this->createForm(\App\Form\RegistrationFormType::class, $user);
+                $form = $this->createForm( \App\Form\RegistrationFormType::class );
 
                 $form->submit( $request->request->all(), false);
 
@@ -39,48 +35,29 @@ namespace App\Controller
                     throw new \App\lib\exceptions\actionException( \App\lib\consts::ERROR_CODE_USER_REGISTRATION_FIELDS_INCORRECT, \App\lib\common::buildErrorArray( $form )[0] );
                 }
 
-                $user_find = $this->getDoctrine()->getRepository(\App\Entity\User::class);
+                $user_repository = $this->getDoctrine()->getRepository(\App\Entity\User::class);
 
                 // перевірка чи не був зареєстрованний раніше nickname
-                if( $user_find->findOneBy( [ 'nickname' => $form[ 'nickname' ]->getData() ] ) )
+                if( !empty( $user_repository->findUserRegistration( $form[ 'nickname' ]->getData(), $form[ 'email' ]->getData() ) ) )
                 {
                     //перехід до catch{}
-                    throw new \App\lib\exceptions\actionException( \App\lib\consts::ERROR_CODE_USER_REGISTRATION_DUPLICATE_NICKNAME );
+                    throw new \App\lib\exceptions\actionException( \App\lib\consts::ERROR_CODE_USER_REGISTRATION_DUPLICATE_NICKNAME_OR_EMAIL );
                 }
 
-                // перевірка чи не був зареєстрованний раніше email
-                if( $user_find->findOneBy( [ 'email' => $form[ 'email' ]->getData() ] )  )
-                {
-                    throw new \App\lib\exceptions\actionException( \App\lib\consts::ERROR_CODE_USER_REGISTRATION_DUPLICATE_EMAIL);
-                }
+                // додаємо користувача
+                $user_repository->addUser( $form );
 
-                // ініціалізуємо обьект
-                $user->setFirstname( $form['firstname']->getData() );
-                $user->setLastname( $form['lastname']->getData() );
-                $user->setNickname( $form['nickname']->getData() );
-                $user->setPassword( $form['password']->getData() );
-                $user->setEmail( $form['email']->getData() );
-                $user->setAge( $form['age']->getData() );
-
-                //додаємо до бд запис
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-
-                return $this->response(
+                return \App\lib\responses\jsonResponse::response(
                     [
                         'code'          => \App\lib\consts::APPLICATION_CODE_OK,
-                        'content'       => 'Зареєстровано успішно. Тепер можете увійти!'
+                        'content'       => ( new \App\lib\core() )->l10n('general_registration' )
                     ]
                 );
             }
             catch( \App\lib\exceptions\baseException $e )
             {
-                return $this->response( $e->getData() );
+                return \App\lib\responses\jsonResponse::response( $e->getData() );
             }
         }
-
-        ///////////////////////////////////////////////////////////////////////
     }
 }

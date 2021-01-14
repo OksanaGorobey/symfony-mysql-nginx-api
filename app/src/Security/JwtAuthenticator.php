@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);namespace App\Security;
+<?php declare(strict_types=1);
+
+namespace App\Security;
 
 /**
  * Class JwtAuthenticator
@@ -33,12 +35,16 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
         \Symfony\Component\Security\Core\Exception\AuthenticationException $authException = null
     ): \Symfony\Component\HttpFoundation\JsonResponse
     {
-        $data =
-        [
-            'message' => 'Authentication Required'
-        ];
-
-        return new \Symfony\Component\HttpFoundation\JsonResponse( $data, \App\lib\consts::HTTP_CODE_UNAUTHORIZED );
+        return \App\lib\responses\jsonResponse::response(
+            [
+                'code'          => \App\lib\consts::APPLICATION_CODE_UNAUTHORIZED,
+                'content'       =>
+                [
+                    'message'   =>  ( new \App\lib\core() )->l10n('error_401' ),
+                ],
+            ],
+            \App\lib\consts::HTTP_CODE_UNAUTHORIZED
+        );
     }
 
     /**
@@ -61,7 +67,7 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
      */
     public function getCredentials(\Symfony\Component\HttpFoundation\Request $request )
     {
-        if( !$request->headers->has( 'Authorization' ) )
+        if( $this->supports( $request ) )
         {
             return false;
         }
@@ -75,14 +81,7 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
             return false;
         }
 
-        $token = $headerParts[ 1 ];
-
-        if( !$token )
-        {
-            return;
-        }
-
-        return $token;
+        return $headerParts[1];
     }
 
     /**
@@ -95,6 +94,7 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
      *
      * @return \App\Entity\User
      */
+
     public function getUser(
         $credentials,
         \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
@@ -107,17 +107,13 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
             $jwt = (array) \Firebase\JWT\JWT::decode(
                 $credentials,
                 $this->params->get( 'jwt_secret' ),
-                [ 'HS256' ]
+                [ \App\lib\consts::JWT_SALT ]
             );
-
+            var_dump($jwt);
             return $this
                 ->em
                 ->getRepository( \App\Entity\User::class )
-                ->findOneBy(
-                    [
-                        'nickname' => $jwt[ 'user' ]
-                    ]
-                );
+                ->findOneByNickname( $jwt[ 'user' ] );
         }
         catch ( \Exception $e )
         {
@@ -158,9 +154,13 @@ class JwtAuthenticator extends \Symfony\Component\Security\Guard\AbstractGuardAu
         \Symfony\Component\Security\Core\Exception\AuthenticationException $exception
     ): \Symfony\Component\HttpFoundation\JsonResponse
     {
-        return new \Symfony\Component\HttpFoundation\JsonResponse(
+        return \App\lib\responses\jsonResponse::response(
             [
-                'message' => 'Authentication Failed'
+                'code'          => \App\lib\consts::APPLICATION_CODE_UNAUTHORIZED,
+                'content'       =>
+                [
+                    'message'   =>  ( new \App\lib\core() )->l10n('error_401' ),
+                ],
             ],
             \App\lib\consts::HTTP_CODE_UNAUTHORIZED
         );

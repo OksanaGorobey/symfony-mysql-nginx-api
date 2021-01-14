@@ -29,7 +29,7 @@ class RegistrationFormType extends BaseFormType
                         ),
                         new \Symfony\Component\Validator\Constraints\Regex(
                             \App\lib\consts::PATTERN_NAME,
-                            $this->_core->l10n('form_firstname_is_invalid'),
+                            $this->_core->l10n('form_firstname_is_invalid')
                         ),
                         new \Symfony\Component\Validator\Constraints\Length(
                             [
@@ -194,7 +194,6 @@ class RegistrationFormType extends BaseFormType
     {
         $resolver->setDefaults(
             [
-            'data_class'      => 'App\Entity\User',
             'csrf_protection' => false,
             'csrf_field_name' => '_token',
             // a unique key to help generate the secret token

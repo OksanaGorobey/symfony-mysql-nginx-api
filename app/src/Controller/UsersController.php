@@ -41,7 +41,7 @@ namespace App\Controller
                     ->getRepository(\App\Entity\User::class)
                     ->findAllByFields( $form['params']->getData() );
 
-                return $this->response(
+                return \App\lib\responses\jsonResponse::response(
                     [
                         'code'      => \App\lib\consts::APPLICATION_CODE_OK,
                         'content'   =>
@@ -54,7 +54,7 @@ namespace App\Controller
             }
             catch( \App\lib\exceptions\actionException $e )
             {
-                return $this->response( $e->getData() );
+                return \App\lib\responses\jsonResponse::response( $e->getData() );
             }
         }
 
@@ -86,7 +86,7 @@ namespace App\Controller
                     ->getRepository(\App\Entity\User::class)
                     ->find($id);
 
-                return $this->response(
+                return \App\lib\responses\jsonResponse::response(
                     [
                         'code'      => \App\lib\consts::APPLICATION_CODE_OK,
                         'content'   =>
@@ -104,7 +104,7 @@ namespace App\Controller
             }
             catch( \App\lib\exceptions\actionException $e )
             {
-                return $this->response( $e->getData() );
+                return \App\lib\responses\jsonResponse::response( $e->getData() );
             }
         }
 

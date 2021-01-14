@@ -28,6 +28,7 @@ namespace App\lib
 
         const APPLICATION_CODE_OK                                   = 200;
         const APPLICATION_CODE_FOUND                                = 302;
+        const APPLICATION_CODE_UNAUTHORIZED                         = 401;
         const APPLICATION_CODE_FORBIDDEN                            = 403;
         const APPLICATION_CODE_NOT_FOUND                            = 404;
         const APPLICATION_CODE_INTERNAL_SERVER_ERROR                = 500;
@@ -39,9 +40,8 @@ namespace App\lib
 
         /////// registration ///////////////////////////////////////////////////
 
-        const ERROR_CODE_USER_REGISTRATION_FIELDS_INCORRECT         = 10201;
-        const ERROR_CODE_USER_REGISTRATION_DUPLICATE_NICKNAME       = 10202;
-        const ERROR_CODE_USER_REGISTRATION_DUPLICATE_EMAIL          = 10203;
+        const ERROR_CODE_USER_REGISTRATION_FIELDS_INCORRECT                  = 10201;
+        const ERROR_CODE_USER_REGISTRATION_DUPLICATE_NICKNAME_OR_EMAIL       = 10202;
 
         /////// list //////////////////////////////////////////////////////////
 
@@ -73,6 +73,7 @@ namespace App\lib
 
         const JWT_SALT                                              = 'HS256';
         const DATETIME_FORMAT_ESCAPED                               = 'd.m.Y H:i';
+        const BAERER_FORMAT                                         = 'Bearer %s';
 
         ////////////////////////////////////////////////////////////////////////
     }

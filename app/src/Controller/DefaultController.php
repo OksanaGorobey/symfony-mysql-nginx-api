@@ -22,7 +22,7 @@ namespace App\Controller
          */
         public function indexAction() : \Symfony\Component\HttpFoundation\JsonResponse
         {
-            return $this->response(
+            return \App\lib\responses\jsonResponse::response(
                 [
                     'code'          => \App\lib\consts::APPLICATION_CODE_OK,
                     'content'       =>
@@ -45,7 +45,7 @@ namespace App\Controller
          */
         public function pingAction() : \Symfony\Component\HttpFoundation\JsonResponse
         {
-            return $this->response(
+            return \App\lib\responses\jsonResponse::response(
                 [
                     'code'          => \App\lib\consts::APPLICATION_CODE_OK,
                     'content'       =>
@@ -68,7 +68,7 @@ namespace App\Controller
          */
         public function error403Action() : \Symfony\Component\HttpFoundation\JsonResponse
         {
-            return $this->response(
+            return \App\lib\responses\jsonResponse::response(
                 [
                     'code'          => \App\lib\consts::APPLICATION_CODE_FORBIDDEN,
                     'content'       =>
@@ -91,7 +91,7 @@ namespace App\Controller
          */
         public function error404Action() : \Symfony\Component\HttpFoundation\JsonResponse
         {
-            return $this->response(
+            return \App\lib\responses\jsonResponse::response(
                 [
                     'code'          => \App\lib\consts::APPLICATION_CODE_NOT_FOUND,
                     'content'       =>
